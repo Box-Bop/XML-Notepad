@@ -39,58 +39,30 @@ namespace ConsoleApp1
                         }
                         else
                         {
-                            //if (note.NoteTitle.Contains(" "))
-                            //{
-                            //    Console.WriteLine("\nPlease make a title that doesn't have any spaces in it.");
-                            //    Console.ReadLine();
-                            //}
-                            //else
-                            //{
-                            //    break;
-                            //}
-                            break;
+                            if (note.NoteTitle.Contains(" "))
+                            {
+                                Console.WriteLine("\nPlease make a title that doesn't have any spaces in it.");
+                                Console.ReadLine();
+                            }
+                            else
+                            {
+                                break;
+                            }
                         }
                     }
                     Console.Clear();
                     Console.WriteLine("What should the note \"" + note.NoteTitle + "\" contain?:\n");
                     var noteContent = Console.ReadLine();
-                    var noteList = new List<Note>();
-
                     //var note = new Note() { NoteContent = noteContent, NoteTitle = noteTitle };
                     //theNote.Add(note);
                     //more notes
-
-                    //XmlDocument doc = new XmlDocument();
-                    //doc.Load("Notepad.xml");
-                    //XmlNode newNote = doc.CreateNode(XmlNodeType.Element, "Note", note.NoteTitle);
-                    //XmlAttribute newAttribute = doc.CreateAttribute(note.NoteTitle);
-                    //newNote.InnerText = noteContent;
-                    //doc.DocumentElement.AppendChild(newNote);
-                    //doc.Save("Notepad.xml");
-                    var note0 = new Note() { NoteTitle = note.NoteTitle, NoteContent = noteContent };
-                    noteList.Add(note0);
-                    var serializer = new XmlSerializer(note.GetType());
-                    if (!File.Exists("Notepad.xml"))
-                    {
-                        using (var writer = XmlWriter.Create("Notepad.xml"))
-                        {
-                            serializer.Serialize(writer, noteList);
-                        }
-                    }
-                    else
-                    {
-                        using (var reader = XmlReader.Create("Notepad.xml"))
-                        {
-                            var notes = (List<Note>)serializer.Deserialize(reader);
-                        }
-                        var note1 = new Note() { NoteTitle = note.NoteTitle, NoteContent = noteContent };
-                        noteList.Add(note1);
-
-                        using (var writer = XmlWriter.Create("Notepad.xml"))
-                        {
-                            serializer.Serialize(writer, noteList);
-                        }
-                    }
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load("Notepad.xml");
+                    XmlNode newNote = doc.CreateNode(XmlNodeType.Element, "Note", note.NoteTitle);
+                    XmlAttribute newAttribute = doc.CreateAttribute(note.NoteTitle);
+                    newNote.InnerText = noteContent;
+                    doc.DocumentElement.AppendChild(newNote);
+                    doc.Save("Notepad.xml");
                     Console.WriteLine("\nYour note has been saved!");
                     Console.ReadLine();
                 }
