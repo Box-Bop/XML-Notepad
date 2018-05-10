@@ -69,7 +69,7 @@ namespace ConsoleApp1
                     //doc.Save("Notepad.xml");
                     var note0 = new Note() { NoteTitle = note.NoteTitle, NoteContent = noteContent };
                     noteList.Add(note0);
-                    var serializer = new XmlSerializer(note.GetType());
+                    var serializer = new XmlSerializer(noteList.GetType());
                     if (!File.Exists("Notepad.xml"))
                     {
                         using (var writer = XmlWriter.Create("Notepad.xml"))
@@ -102,11 +102,10 @@ namespace ConsoleApp1
                     List<string> titles = new List<string>();
                     XmlDocument xmlDoc = new XmlDocument();
                     xmlDoc.Load("Notepad.xml");
-                    XmlNodeList noteNodes = xmlDoc.SelectNodes("//notes/Note");
-                    foreach (XmlNode xmlnode in xmlDoc.DocumentElement.ChildNodes)
+                    XmlNodeList noteNodes = xmlDoc.SelectNodes("//ArrayOfNotes/Note");
+                    foreach (XmlNode xmlnode in xmlDoc.DocumentElement)
                     {
-                        Console.WriteLine("(" + selection + ") " + xmlnode.Attributes["xmlns"].Value);
-                        titles.Add(xmlnode.InnerText);
+                        Console.WriteLine("(" + selection + ") " + noteNodes);
                         selection++;
                     }
                     selection--;
