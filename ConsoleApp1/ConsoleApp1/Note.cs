@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Note
+    public class Note
     {
         public string NoteTitle { get; set; }
         public string NoteContent { get; set; }
