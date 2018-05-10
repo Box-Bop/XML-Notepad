@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
-using System.IO;
 
 namespace ConsoleApp1
 {
@@ -14,8 +10,19 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            while (true)
+
+            Console.WriteLine("What would you like to do?:");
+            Console.WriteLine("(1) Write a note.");
+            Console.WriteLine("(2) Read all the current notes.");
+            var answer = Console.ReadLine();
+
+            if (answer == "1")
             {
+
+            }
+            if (answer == "2")
+            {
+<<<<<<< HEAD
                 Console.Clear();
                 Console.WriteLine("What would you like to do?:\n");
                 Console.WriteLine("(1) Write a note.");
@@ -122,8 +129,9 @@ namespace ConsoleApp1
                         Console.WriteLine("Invalid selection, please choose a note by inputting one of its corresponding numbers");
                         Console.ReadLine();
                     }
+=======
+>>>>>>> parent of 98f6876... Exercise done
 
-                }
             }
         }
     }
