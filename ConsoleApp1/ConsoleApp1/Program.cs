@@ -69,6 +69,15 @@ namespace ConsoleApp1
                     }
                     Console.WriteLine("\nYour note has been saved!");
                     Console.ReadLine();
+                    //var noteContent = Console.ReadLine();
+                    //XmlDocument doc = new XmlDocument();
+                    //doc.Load("Notepad.xml");
+                    //XmlNode newNote = doc.CreateNode(XmlNodeType.Element, "Note", note.NoteTitle);
+                    //XmlAttribute newAttribute = doc.CreateAttribute(note.NoteTitle);
+                    //newNote.InnerText = noteContent;
+                    //doc.DocumentElement.AppendChild(newNote);
+                    //doc.Save("Notepad.xml");
+                    //Console.WriteLine("\nYour note has been saved!");
                 }
                 if (answer == "2")
                 {
@@ -116,6 +125,16 @@ namespace ConsoleApp1
                             Console.ReadLine();
                         }
                     }
+                    //List<string> titles = new List<string>();
+                    //XmlDocument xmlDoc = new XmlDocument();
+                    //xmlDoc.Load("Notepad.xml");
+                    //XmlNodeList noteNodes = xmlDoc.SelectNodes("//notes/Note");
+                    //foreach (XmlNode xmlnode in xmlDoc.DocumentElement.ChildNodes)
+                    //{
+                    //    Console.WriteLine("(" + selection + ") " + xmlnode.Attributes["xmlns"].Value);
+                    //    titles.Add(xmlnode.InnerText);
+                    //    selection++;
+                    //}
                 }
 
                 if (answer == "3")
