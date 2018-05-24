@@ -27,159 +27,19 @@ namespace ConsoleApp1
                 string xmlPath = path + @"\..\..\Notepad.xml";
                 if (answer == "1")
                 {
-                    var serializer = new XmlSerializer(note.GetType());
-                    if (!File.Exists(xmlPath))
-                    {
-                        using (var writer = XmlWriter.Create(xmlPath))
-                        {
-                            serializer.Serialize(writer, note);
-                        }
-                    }
-                    else if (File.Exists(xmlPath))
-                    {
-                        using (var reader = XmlReader.Create(xmlPath))
-                        {
-                            note = (List<Note>)serializer.Deserialize(reader);
-                        }
-                    }
-                    string title = "";
-                    while (true)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Great, what should the title of the note be?:\n");
-                        title = Console.ReadLine();
-                        if (title == "")
-                        {
-                            Console.WriteLine("\nTitle shouldn't be blank");
-                            Console.ReadLine();
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    Console.Clear();
-                    Console.WriteLine("What should the note \"" + title + "\" contain?:\n");
-                    var noteContent = Console.ReadLine();
-                    var insertNote = new Note() { NoteTitle = title, NoteContent = noteContent };
-                    note.Add(insertNote);
-                    using (var writer = XmlWriter.Create(xmlPath))
-                    {
-                        serializer.Serialize(writer, note);
-                    }
-                    Console.WriteLine("\nYour note has been saved!");
-                    Console.ReadLine();
-                    //var noteContent = Console.ReadLine();
-                    //XmlDocument doc = new XmlDocument();
-                    //doc.Load("Notepad.xml");
-                    //XmlNode newNote = doc.CreateNode(XmlNodeType.Element, "Note", note.NoteTitle);
-                    //XmlAttribute newAttribute = doc.CreateAttribute(note.NoteTitle);
-                    //newNote.InnerText = noteContent;
-                    //doc.DocumentElement.AppendChild(newNote);
-                    //doc.Save("Notepad.xml");
-                    //Console.WriteLine("\nYour note has been saved!");
+                    var write = new Note();
+                    write.NoteWrite();
                 }
                 if (answer == "2")
                 {
-                    int selection = 0;
-                    Console.Clear();
-                    Console.WriteLine("These are your notes, which one would you like to read?: (input title of note)\n");
-                    if (!File.Exists(xmlPath))
-                    {
-                        Console.WriteLine("Notepad.xml file doesn't exist.");
-                    }
-                    else
-                    {
-                        var notes = new List<Note>();
-                        var serializer = new XmlSerializer(typeof(List<Note>));
-                        using (var reader = XmlReader.Create(xmlPath))
-                        {
-                            notes = (List<Note>)serializer.Deserialize(reader);
-                        }
-                        foreach (var n0te in notes)
-                        {
-                            Console.WriteLine("(" + selection + ") " + n0te.NoteTitle);
-                            selection++;
-                        }
-                        selection--;
-                        Console.WriteLine();
-                        if (selection >= 0)
-                        {
-                            int dec = Convert.ToInt16(Console.ReadLine());
-                            if (dec <= selection)
-                            {
-                                Console.WriteLine();
-                                Console.WriteLine(notes[dec].NoteContent);
-                                Console.ReadLine();
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid selection, please choose a note by inputting one of its corresponding numbers");
-                                Console.ReadLine();
-                            }
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("No available notes.");
-                            Console.ReadLine();
-                        }
-                    }
-                    //List<string> titles = new List<string>();
-                    //XmlDocument xmlDoc = new XmlDocument();
-                    //xmlDoc.Load("Notepad.xml");
-                    //XmlNodeList noteNodes = xmlDoc.SelectNodes("//notes/Note");
-                    //foreach (XmlNode xmlnode in xmlDoc.DocumentElement.ChildNodes)
-                    //{
-                    //    Console.WriteLine("(" + selection + ") " + xmlnode.Attributes["xmlns"].Value);
-                    //    titles.Add(xmlnode.InnerText);
-                    //    selection++;
-                    //}
+                    var read = new Note();
+                    read.NoteRead();
                 }
 
                 if (answer == "3")
                 {
-                    Console.Clear();
-                    int selection = 0;
-                    Console.WriteLine("Which note would you like to delete?:\n");
-                    var remNotes = new List<Note>();
-                    var serializer = new XmlSerializer(typeof(List<Note>));
-                    using (var reader = XmlReader.Create(xmlPath))
-                    {
-                        remNotes = (List<Note>)serializer.Deserialize(reader);
-                    }
-                    foreach (var n0te in remNotes)
-                    {
-                        Console.WriteLine("(" + selection + ") " + n0te.NoteTitle);
-                        selection++;
-                    }
-                    selection--;
-                    Console.WriteLine();
-                    if (selection >= 0)
-                    {
-                        int dec = Convert.ToInt16(Console.ReadLine());
-                        if (dec <= selection)
-                        {
-                            remNotes.RemoveAt(dec);
-                            using (var writer = XmlWriter.Create(xmlPath))
-                            {
-                                serializer.Serialize(writer, remNotes);
-                            }
-                            Console.WriteLine("\nYour note has been deleted!");
-                            Console.ReadLine();
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid selection, please choose a note by inputting one of its corresponding numbers");
-                            Console.ReadLine();
-                        }
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine("No available notes.");
-                        Console.ReadLine();
-                    }
+                    var delete = new Note();
+                    delete.NoteDelete();
                 }
             }
         }
